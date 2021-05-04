@@ -21,12 +21,32 @@ app.post("/students",async(req, res)=>{
     catch(e){
         res.status(400).send(e);
     }
-    // user.save().then(()=>{
-    //     res.status(201).send(user);
-    // }).catch((e)=>{
-    //     res.status(400).send(e);
-    // })
+ 
 });
+
+// read all registerd students
+
+app.get("/students",async(req, res)=>{
+    try {
+    const studentsData = await Student.find();
+     res.send(studentsData);
+    }catch(e){
+        res.send(e);
+    }
+})
+
+//read a perticular student data
+
+app.get("/students/:id",async(req, res)=>{
+    try{
+        const _id = req.params.id;
+        const studentData = await Student.findById(_id);
+        res.send(studentData);
+
+    }catch(e){
+           res.send(e);
+    }
+})
 
 
 app.listen(port, ()=>{
