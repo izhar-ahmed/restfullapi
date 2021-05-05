@@ -35,7 +35,7 @@ app.get("/students",async(req, res)=>{
     }
 })
 
-//read a perticular student data
+//read a perticular student data by id
 
 app.get("/students/:id",async(req, res)=>{
     try{
@@ -46,6 +46,42 @@ app.get("/students/:id",async(req, res)=>{
     }catch(e){
            res.send(e);
     }
+})
+
+//read a perticular student by its name
+
+// app.get("/students/:name", async(req, res)=>{
+//     try{
+
+//         const name = req.params.name;
+        // const studentName = await Student.find({name: name});
+        // res.send(studentName);
+        // console.log(name);
+        // if(!studentName){
+        //     return res.status(404).send();
+        // }else{
+        //     res.send(studentName);
+
+        // }
+
+  
+//     }catch(e){
+//            res.status(500).send(e);
+//     }
+// })
+
+//Update students by its Id
+
+app.patch("/students/:id", async(req, res)=> {
+    try{
+    const _id = req.params.id;
+    const updateStudent = await Student.findByIdAndUpdate(_id, req.body,{
+        new:true
+    });
+    res.send(updateStudent);
+}catch(e){
+    res.send(e);
+}
 })
 
 
